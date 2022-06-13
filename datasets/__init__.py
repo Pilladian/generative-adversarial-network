@@ -3,7 +3,6 @@
 from torch.utils.data import Dataset
 import os
 from PIL import Image
-import torch
 
 
 class MNIST(Dataset):
@@ -30,9 +29,8 @@ class MNIST(Dataset):
     def __getitem__(self, idx):
         img_loc = self.data["image_file"][idx]
         image = Image.open(os.path.join(self.data_loc, img_loc))
-        label = torch.tensor(float(self.data["label"][idx]))
 
         if self.transform is not None:
             image = self.transform(image)
 
-        return (image, label)
+        return (image, image)
